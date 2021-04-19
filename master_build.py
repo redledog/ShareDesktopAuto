@@ -1,5 +1,5 @@
 import os
 
-command = 'pyinstall -clean --noconsole main.py'
+command = 'pyinstaller --clean --noconsole --distpath .\dist\master main.py'
 
 os.system(command)

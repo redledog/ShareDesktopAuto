@@ -17,7 +17,7 @@ global count_done
 count_done = 0
 
 global DEBUG_MODE
-DEBUG_MODE = True
+DEBUG_MODE = False
 
 app = pwa.application.Application()
 
@@ -26,10 +26,12 @@ root = tk.Tk()
 WORK_TEXT = '작동중...'
 
 def dprint(msg):
+    global DEBUG_MODE
     if DEBUG_MODE:
         print(msg)
 
 def dsound():
+    global DEBUG_MODE
     if DEBUG_MODE:
         winsound.PlaySound("button.wav", winsound.SND_ALIAS)
 
@@ -51,7 +53,7 @@ def check_connect_dialog():
 
                 global count_done
                 count_done += 1
-                
+
                 dprint(f'Done. count:{count_done}')
             except:
                 dprint(f'Not Yet. count:{count_done}')
