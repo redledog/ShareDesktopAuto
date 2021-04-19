@@ -28,13 +28,15 @@ WORK_TEXT = '작동중...'
 def dprint(msg):
     if DEBUG_MODE:
         print(msg)
-    else:
-        return
+
+def dsound():
+    if DEBUG_MODE:
+        winsound.PlaySound("button.wav", winsound.SND_ALIAS)
 
 def check_connect_dialog():
     if not check_main():
         return
-    winsound.PlaySound("button.wav", winsound.SND_ALIAS)
+    dsound()
     dprint(f'Find Title : {chrome_name}')
     handles = pwa.findwindows.find_windows(title_re=chrome_name)
     if len(handles) < 1:
@@ -45,11 +47,11 @@ def check_connect_dialog():
             try:
                 app.connect(handle=handle)
                 window = app.window(handle = handle)
-                window.findbestmatch.find_best_match('계속')
-                #window.set_focus()
                 window['계속'].click()
+
                 global count_done
                 count_done += 1
+                
                 dprint(f'Done. count:{count_done}')
             except:
                 dprint(f'Not Yet. count:{count_done}')
